@@ -7,6 +7,7 @@
   $result = $conn->query($sql);
   $conn->close();
   if ($result->num_rows > 0) {
+    $string = "";
     // output data of each row
     while($row = $result->fetch_assoc()) {
       $string .= "<br> Note Name: ". $row["name"]. "<br>Message: ". $row["message"]. "<br>";
@@ -14,5 +15,5 @@
   } else {
     $string = "0 results";
   }
-  return $string;
+  echo $string;
 ?>

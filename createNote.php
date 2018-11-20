@@ -13,5 +13,5 @@
     $string = "Error: " . $sql . "<br>" . $conn->error;
   }
   $conn->close();
-  return $string;
+  echo $string;
 ?>

@@ -1,33 +1,31 @@
-document.getElementById("result").innerHTML = "Results will be shown here";
+// Anonymous "self-invoking" function
+(function() {
+    var startingTime = new Date().getTime();
+    // Load the script
+    var script = document.createElement("SCRIPT");
+    script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js';
+    script.type = 'text/javascript';
+    document.getElementsByTagName("head")[0].appendChild(script);
 
-function findNote() {
-    if(document.getElementById("searchName").value != ""){
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                // Typical action to be performed when the document is ready:
-                document.getElementById("result").innerHTML = xhttp.responseText;
-            }
-        };
-        xhttp.open("POST", "./findNote.php", true);
-        xhttp.send();
-    }
-}
+    // Poll for jQuery to come into existance
+    var checkReady = function(callback) {
+        if (window.jQuery) {
+            callback(jQuery);
+        }
+        else {
+            window.setTimeout(function() { checkReady(callback); }, 20);
+        }
+    };
 
-function createNote() {
-    if(document.getElementById("createName").value != "" && document.getElementById("createMessage").value != "" ){
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            alert("state change");
-            if (this.readyState == 4 && this.status == 200) {
-                // Typical action to be performed when the document is ready:
-                alert(xhttp.responseText);
-                document.getElementById("result").innerHTML = xhttp.responseText;
-            }
-        };
-        xhttp.open("POST", "./createNote.php", true);
-        alert("request create");
-        xhttp.send();
-        alert("request sent");
-    }
-}
+    checkReady(function($){
+        $("#searchButton").click(function(){
+            $.post( "findNote.php", { input: document.getElementById("searchName").value} );
+        })
+    });
+
+    checkReady(function($){
+        $("#createButton").click(function(){
+            $.post( "createNote.php", { name: document.getElementById("createName").value, message: document.getElementById("createMessage").value} );
+        })
+    });
+})();
