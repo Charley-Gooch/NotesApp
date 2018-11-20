@@ -1,11 +1,12 @@
-document.getElementById("test").innerHTML = "1234";
+document.getElementById("result").innerHTML = "Results will be shown here";
 
 function findNote() {
-    if(document.getElementById("searchName").innerHTML != ""){
+    if(document.getElementById("searchName").value != ""){
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("results").innerHTML = this.responseText;
+                // Typical action to be performed when the document is ready:
+                document.getElementById("result").innerHTML = xhttp.responseText;
             }
         };
         xhttp.open("POST", "./findNote.php", true);
@@ -14,15 +15,19 @@ function findNote() {
 }
 
 function createNote() {
-    if(document.getElementById("createName").innerHTML != "" && document.getElementById("createMessage").innerHTML != ""){
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("results").innerHTML = this.responseText;
-        }
-    };
-    xhttp.open("POST", "./createNote.php", true);
-    xhttp.send();
-  }
+    if(document.getElementById("createName").value != "" && document.getElementById("createMessage").value != "" ){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            alert("state change");
+            if (this.readyState == 4 && this.status == 200) {
+                // Typical action to be performed when the document is ready:
+                alert(xhttp.responseText);
+                document.getElementById("result").innerHTML = xhttp.responseText;
+            }
+        };
+        xhttp.open("POST", "./createNote.php", true);
+        alert("request create");
+        xhttp.send();
+        alert("request sent");
+    }
 }
-

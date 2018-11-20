@@ -6,23 +6,13 @@
   $sql = preg_replace("/([^A-Za-z(),''])\s/", " ", $sql);
   $result = $conn->query($sql);
   $conn->close();
+  if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+      $string .= "<br> Note Name: ". $row["name"]. "<br>Message: ". $row["message"]. "<br>";
+    }
+  } else {
+    $string = "0 results";
+  }
+  return $string;
 ?>
-<html>
-  <head>
-    <link rel="stylesheet" href="./findNote.css">
-  </head>
-  <body>
-    <div id="results">
-    <?php
-      if ($result->num_rows > 0) {
-        // output data of each row
-        while($row = $result->fetch_assoc()) {
-            echo "<br> Note Name: ". $row["name"]. "<br>Message: ". $row["message"]. "<br>";
-        }
-      } else {
-        echo "0 results";
-      }
-    ?>
-    </div>
-  </body>
-</html>

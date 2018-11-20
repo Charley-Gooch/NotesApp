@@ -3,7 +3,7 @@ body {
   display: block;
 }
 
-div#test{
+div#selection{
   position: absolute;
   width: 60%;
   top: 15%;
@@ -13,3 +13,12 @@ div#test{
   border: 3px solid black;
 }
 
+div#result{
+  position: absolute;
+  width: 60%;
+  top: 35%;
+  left: 50%;
+  margin-left: -30%;
+  background-color: rgba(0,0,0,0.2);
+  border: 3px solid black;
+}
