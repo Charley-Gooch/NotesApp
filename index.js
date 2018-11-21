@@ -19,13 +19,24 @@
 
     checkReady(function($){
         $("#searchButton").click(function(){
-            $.post( "findNote.php", { input: document.getElementById("searchName").value} );
+            //Post the form data serialized for the proper formatting
+            $.post("./findNote.php", {input: document.getElementById("searchName").value}
+            //Get the response from process.php
+            , function(response){
+                    //Set results div to response content
+                    document.getElementById("result").innerHTML = response;
+            });
         })
     });
 
     checkReady(function($){
         $("#createButton").click(function(){
-            $.post( "createNote.php", { name: document.getElementById("createName").value, message: document.getElementById("createMessage").value} );
+            //Post the form data serialized for the proper formatting
+            $.post( "./createNote.php", { name: document.getElementById("createName").value, message: document.getElementById("createMessage").value}
+            , function(response){
+                //Set results div to response content
+                document.getElementById("result").innerHTML = response;
+            });
         })
     });
 })();

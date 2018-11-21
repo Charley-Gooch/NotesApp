@@ -10,7 +10,7 @@
     $string = "";
     // output data of each row
     while($row = $result->fetch_assoc()) {
-      $string .= "<br> Note Name: ". $row["name"]. "<br>Message: ". $row["message"]. "<br>";
+      $string .= "Note Name: ". $row["name"]. "<br>Message: ". $row["message"]. "<br>";
     }
   } else {
     $string = "0 results";
